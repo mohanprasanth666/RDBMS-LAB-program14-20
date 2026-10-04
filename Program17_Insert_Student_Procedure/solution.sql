@@ -28,8 +28,21 @@ CREATE PROCEDURE InsertStudent(
     IN p_department_id INT
 )
 BEGIN
+CREATE OR REPLACE PROCEDURE InsertStudent (
+    p_StudentID   IN NUMBER,
+    p_StudentName IN VARCHAR2,
+    p_CourseID    IN NUMBER
+)
+IS
+BEGIN
+    INSERT INTO Student (StudentID, StudentName, CourseID)
+    VALUES (p_StudentID, p_StudentName, p_CourseID);
 
-    -- Insert the student record
+    COMMIT;
+
+    DBMS_OUTPUT.PUT_LINE('Student record inserted successfully');
+END;
+/
 
 END $$
 
