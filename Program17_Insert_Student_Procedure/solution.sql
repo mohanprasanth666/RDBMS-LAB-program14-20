@@ -43,6 +43,10 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Student record inserted successfully');
 END;
 /
+    BEGIN
+    InsertStudent(101, 'Mohan', 201);
+END;
+/
 
 END $$
 
