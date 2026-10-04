@@ -21,14 +21,21 @@ CREATE TRIGGER AfterEmployeeInsert
 AFTER INSERT ON Employee
 FOR EACH ROW
 BEGIN
-
-    -- Insert an automatic message into Employee_Log
+CREATE OR REPLACE TRIGGER employee_insert_trigger
+AFTER INSERT ON Employee
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('New employee record inserted successfully.');
+END;
+/
 
 END $$
 
 DELIMITER ;
 
--- Test the trigger
+INSERT INTO Employee
+VALUES (101, 'Arun', 'Manager');
+
+COMMIT;
 
 INSERT INTO Employee
 VALUES (1, 'Arun', 'Computer Science');
