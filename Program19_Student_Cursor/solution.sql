@@ -6,19 +6,34 @@ DELIMITER $$
 
 CREATE PROCEDURE DisplayStudents()
 BEGIN
+DECLARE
+    CURSOR student_cursor IS
+        SELECT StudentID, StudentName, DepartmentID
+        FROM Student;
 
-    -- Declare variables
+    v_studentid Student.StudentID%TYPE;
+    v_studentname Student.StudentName%TYPE;
+    v_departmentid Student.DepartmentID%TYPE;
 
-    -- Declare cursor
+BEGIN
+    OPEN student_cursor;
 
-    -- Declare NOT FOUND handler
+    LOOP
+        FETCH student_cursor
+        INTO v_studentid, v_studentname, v_departmentid;
 
-    -- Open cursor
+        EXIT WHEN student_cursor%NOTFOUND;
 
-    -- Fetch records using a loop
+        DBMS_OUTPUT.PUT_LINE(
+            'Student ID: ' || v_studentid ||
+            ', Student Name: ' || v_studentname ||
+            ', Department ID: ' || v_departmentid
+        );
+    END LOOP;
 
-    -- Close cursor
-
+    CLOSE student_cursor;
+END;
+/
 END $$
 
 DELIMITER ;
